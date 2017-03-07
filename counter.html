@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>	
+	 <!-- Compiled and minified CSS -->
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+
+  	<!-- Compiled and minified JavaScript -->
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+</head>
+<body>	
+		<div class="card-panel teal">
+			<div>You've clicked <span data-bind='text: numberOfClick'>&nbsp;</span> times</div>
+			<button class="btn waves-effect waves-light red accent-2" name="action" data-bind='click: registerClick, disable: hasClickedTooManyTimes'>Click</button>
+		  	<div data-bind='visible: hasClickedTooManyTimes'>
+		  		<h4>That's too many clicks! Please stop before you wear out your fingers.</h4>
+		  		<button class="btn waves-effect waves-light red accent-2" data-bind='click: resetClick'>Reset Clicks</button>		  			
+		  	</div>
+		</div>	
+
+	<script type="text/javascript">
+		var ClickCounterViewModel = function () {
+			this.numberOfClick = ko.observable(0);
+
+			this.registerClick = function () {
+				this.numberOfClick(this.numberOfClick() + 1);
+			};
+
+			this.resetClick = function () {
+				this.numberOfClick(0);
+			}
+
+			this.hasClickedTooManyTimes = ko.pureComputed(function () {
+				return this.numberOfClick() >= 3;				
+			}, this);
+		};
+
+		ko.applyBindings(new ClickCounterViewModel());
+	</script>
+</body>
+</html>
