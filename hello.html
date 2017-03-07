@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>	
+</head>
+<body>
+	<div class="observable">
+		<p>First Name: <input data-bind='value: firstName'/></p>
+		<P>Last Name: <input data-bind='value: lastName'/></P>
+		<h2>Hello, <span data-bind='text: fullName'></span>!</h2>
+	</div>
+
+	<script>
+		var viewModel = function (first, last) {
+			this.firstName = ko.observable(first);
+			this.lastName = ko.observable(last);
+
+			this.fullName = ko.computed(function() {
+				return this.firstName() + " " + this.lastName();
+			}, this);
+		};
+
+		ko.applyBindings(new viewModel("FUCK","YOU!!!"));
+	</script>
+</body>
+</html>
