@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+	<title>Better - Knockout JS</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
+</head>
+<body>
+	<form data-bind="submit: addItem">
+		<span>Add Item:</span>
+		<input type="text" data-bind='value:itemToAdd, valueUpdate: "afterkeydown"'/>
+		<button type="submit" data-bind="enable: itemToAdd() > 0">Add</button>
+	</form>
+	<p>Your values: </p>
+	<select multiple="multiple" height="5" data-bind="options: allItems, selectedOptions: selectedItems"></select>
+	<div>
+		<button data-bind="click: removeSelected, enable: selectedItems().length > 0">Remove</button>
+		<button data-bind="click: sortItems, enable: allItems().length > 1">Sort</button>
+	</div>
+	<ul data-bind="foreach: ['cats', 'dogs', 'fish']">
+   		 <li>The value is <span data-bind="text: $data"></span></li>
+	</ul>
+
+	<script type="text/javascript">
+		var BetterListModel = function () {
+			this.itemToAdd = ko.observable("");
+			this.allItems = ko.observableArray(["Fires","Eggs Benedict", "Ham", "Cheese"]);
+			this.selectedItems = ko.observableArray(["Ham"]);
+
+			this.addItem = function () {
+				if ((this.itemToAdd() != "") && (this.allItems.indexOf(this.itemToAdd()) < 0)) {
+					this.allItems.push(this.itemToAdd());
+				}
+				this.itemToAdd(""); //Clear the text box
+			};
+
+			this.removeSelected = function () {
+				this.allItems.removeAll(this.selectedItems());	
+				this.selectedItems([""]); //Clear selection
+			};
+
+			this.sortItems = function () {
+				this.allItems.sort();
+			};
+		};
+
+		ko.applyBindings(new BetterListModel());
+	</script>
+</body>
+</html>
