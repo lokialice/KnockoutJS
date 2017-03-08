@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>		
+</head>
+<body>
+	<form data-bind="submit: addItem">
+		<span>New Item:</span>
+		<input data-bind='value: itemToAdd, valueUpdate: "afterkeydown"'/>
+		<button type="submit" data-bind="enable:itemToAdd().length > 0">Add</button>
+		<p>Your items:</p>
+		<select multiple="multiple" width="50" data-bind="options: items"></select>
+	</form>
+
+	<script type="text/javascript">
+		var SimpleListModel = function (items) {
+			this.items = ko.observableArray(items);
+			this.itemToAdd = ko.observable("");
+			this.addItem = function () {
+				if (this.itemToAdd() != "") {
+
+					this.items.push(this.itemToAdd());
+					this.itemToAdd("");
+				}
+			}.bind(this);
+		};
+
+		ko.applyBindings(new SimpleListModel(["Alpha", "Beta","Gama"]));
+	</script>
+</body>
+</html>
