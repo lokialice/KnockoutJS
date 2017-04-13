@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IF Binding</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>	
+</head>
+<body>
+	<label><input type="checkbox" data-bind="checked: displayMessage" name=""/> Display message</label>
+	<div data-bind="if: displayMessage">Here is a message. Astonishing.</div>
+
+	<ul data-bind="foreach: planets">
+    <li>
+        Planet: <b data-bind="text: name"> </b>
+        <div data-bind="if: capital">
+            Capital: <b data-bind="text: capital.cityName"> </b>
+        </div>
+    </li>
+</ul>
+
+
+	<script type="text/javascript">
+		ko.applyBindings({
+			displayMessage: ko.observable(false)
+		});
+		ko.applyBindings({
+        	planets: ko.observableArray([
+            	{ name: 'Mercury', capital: null }, 
+            	{ name: 'Earth', capital: { cityName: 'Barnsley' } }        
+        	]) 
+    	});
+	</script>
+</body>
+</html>
