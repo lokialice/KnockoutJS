@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Text Binding</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>	
+</head>
+<body>
+ 	Today's message is: <span data-bind="text: myMessage"></span>
+ 	This item is <span data-bind="text: priceRating"></span> today.
+ 	<script type="text/javascript">
+ 		var viewModel = {
+ 			myMessage: ko.observable(),
+ 			price: ko.observable(24.95)
+ 		};
+ 		viewModel.myMessage("Hello, world!");
+ 		viewModel.priceRating = ko.pureComputed(function (){
+ 			return this.price() > 50 ? "expensive" : "affordable";
+ 		}, viewModel);
+ 		ko.applyBindings(viewModel);
+
+ 	</script>
+</body>
+</html>

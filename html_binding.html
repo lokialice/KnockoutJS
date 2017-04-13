@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HTML Binding</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>	
+</head>
+<body>
+	<div data-bind="html:details"></div>
+	<script type="text/javascript">
+		var viewModel = {
+			details: ko.observable()
+		};
+
+		viewModel.details("<em>For further details, view the report <a href='report.html'>here</a>.</em>");
+		ko.applyBindings(viewModel);
+	</script>
+</body>
+</html>

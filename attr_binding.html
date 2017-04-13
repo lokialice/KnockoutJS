@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ATTR Binding</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js"></script>
+</head>
+<body>
+	<a data-bind="attr: { href:url, title:details }">
+		Report
+	</a>
+	<script type="text/javascript">
+		var viewModel = {
+			url:ko.observable("year-end.html"),
+			details:ko.observable("Report including final year end statistics")
+		};
+		ko.applyBindings(viewModel);
+	</script>
+</body>
+</html>
